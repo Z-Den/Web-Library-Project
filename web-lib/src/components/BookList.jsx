@@ -50,24 +50,28 @@ const BookList = ({ books, searchQuery, onDeleteBook, onEditBook }) => {
                                 value={formData.title}
                                 onChange={handleChange}
                                 placeholder="Название"
+                                maxLength={255}
                             />
                             <input
                                 name="author_id"
                                 value={formData.author_id}
                                 onChange={handleChange}
                                 placeholder="Автор"
+                                type={"number"}
                             />
                             <input
                                 name="genre_id"
                                 value={formData.genre_id}
                                 onChange={handleChange}
                                 placeholder="Жанр"
+                                type={"number"}
                             />
                             <input
                                 name="language"
                                 value={formData.language}
                                 onChange={handleChange}
                                 placeholder="Язык"
+                                maxLength={2}
                             />
                             <button className="button" onClick={handleSave}>Сохранить</button>
                             <button className="button" onClick={handleCancel}>Отмена</button>

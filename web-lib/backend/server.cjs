@@ -1,5 +1,6 @@
-const express = require('express');
+/*const express = require('express');
 const cors = require('cors');
+
 const {Pool} = require('pg');
 const os = require('os');
 const fs = require('fs');
@@ -136,6 +137,38 @@ app.put('/api/books/:id', async (req, res) => {
     }
 });
 
+
+app.listen(port, () => {
+    console.log(`Сервер запущен на http://localhost:${port}`);
+});*/
+const express = require('express');
+const cors = require('cors');
+const {
+    getSystemInfo, getFileInfo
+} = require('./system-func.cjs');
+const {
+    getBooks, addBook, deleteBook, updateBook, getBookStats
+} = require('./book-func.cjs');
+
+const app = express();
+const port = 3000;
+
+app.use(cors({
+    origin: ["http://localhost:5173"],
+    methods: ["GET", "POST", "DELETE", "PUT"]
+}));
+app.use(express.json());
+
+// Маршруты для системы
+app.get('/api/system-info', getSystemInfo);
+app.get('/api/file-info', getFileInfo);
+
+// Маршруты для книг
+app.get('/api/books', getBooks);
+app.post('/api/books', addBook);
+app.delete('/api/books/:id', deleteBook);
+app.put('/api/books/:id', updateBook);
+app.get('/api/stats', getBookStats);
 
 app.listen(port, () => {
     console.log(`Сервер запущен на http://localhost:${port}`);

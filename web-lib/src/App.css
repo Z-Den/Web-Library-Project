@@ -1,140 +1,177 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+    height: 6em;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
 }
+
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+    filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+    filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
 @keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+    a:nth-of-type(2) .logo {
+        animation: logo-spin infinite 20s linear;
+    }
 }
 
 .card {
-  padding: 2em;
+    padding: 2em;
 }
 
-.book-item{
-  background-color: #5d5b59;
-  display: inline-block;
-  margin: 20px;
-  box-shadow: 5px 2px 6px #ffffff;
-  align-items: start;
+.search-bar {
+    background-color: #242424;
+    color: #fff;
+    border: #242424 1px solid;
+    padding: 5px;
+    outline: none;
+    border-bottom: 1px solid white;
 }
 
-.button{
-  margin: 5px 5px;
+.book-input{
+    background-color: #242424;
+    color: #fff;
+    border: #242424 1px solid;
+    padding: 5px;
+    outline: none;
+    border-bottom: 1px solid white;
+    margin-right: 10px;
 }
 
-.button:hover{
-  background-color: #949d22;
-  transition: background-color 500ms ease-out;
+
+.search-bar:focus{
+    color: wheat;
 }
 
-.editingBook{
+
+.book-item {
+    background-color: #5d5b59;
+    display: inline-block;
+    margin: 20px;
+    box-shadow: 5px 2px 6px #ffffff;
+    align-items: start;
+}
+
+/*.book-item:hover {
+    background-color: #5d5b59;
+    display: inline-block;
+    margin: 20px;
+    box-shadow: 5px 2px 6px #8e9a25;
+    transform: translate(5px, 5px);
+    align-items: start;
+}*/
+
+.button {
+    margin: 5px 5px;
+}
+
+.button:hover {
+    background-color: #949d22;
+    transition: background-color 500ms ease-out;
+}
+
+.editingBook {
 
 }
 
-.edit-form{
-  width: 250px;
-  height: 300px;
+.edit-form {
+    width: 250px;
+    height: 300px;
 }
 
 .read-the-docs {
-  color: #888;
+    color: #888;
 }
 
 .status-loading {
-  color: white;
-  font-size: 1.2rem;
-  margin: 10px 0;
+    color: white;
+    font-size: 1.2rem;
+    margin: 10px 0;
 }
 
 .status-error {
-  color: red;
-  font-size: 1rem;
-  margin: 10px 0;
+    color: red;
+    font-size: 1rem;
+    margin: 10px 0;
 }
 
 .system-info {
-  margin-top: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 .system-info h2 {
-  margin-bottom: 10px;
-  font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
 }
 
 .system-info ul {
-  list-style: none;
-  padding: 0;
+    list-style: none;
+    padding: 0;
 }
 
 .system-info li {
-  margin-bottom: 5px;
-  font-size: 1.1rem;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
 }
 
 .file-info {
-  margin-top: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 .file-info h2 {
-  margin-bottom: 10px;
-  font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
 }
 
 .file-info pre {
-  padding: 10px;
-  border-radius: 5px;
-  white-space: pre-wrap; /* Разрешить переносы строк */
-  font-family: monospace;
-  font-size: 1rem;
+    padding: 10px;
+    border-radius: 5px;
+    white-space: pre-wrap; /* Разрешить переносы строк */
+    font-family: monospace;
+    font-size: 1rem;
 }
 
 .stats {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  font-size: 0.9rem;
-  font-family: Arial, sans-serif;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    font-size: 0.9rem;
+    font-family: Arial, sans-serif;
 }
+
 .stats p {
-  margin: 0;
-  padding: 0;
-  font-weight: bold;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
 }
 
 

@@ -22,12 +22,12 @@ const BookForm = ({ onAddBook }) => {
 
     return (
         <form className="book-form" onSubmit={handleSubmit}>
-            <input name="title" placeholder="Название" value={formData.title} onChange={handleChange} required />
-            <input name="description" placeholder="Описание" value={formData.description} onChange={handleChange} />
-            <input name="author_id" placeholder="ID автора" value={formData.author_id} onChange={handleChange} required />
-            <input name="genre_id" placeholder="ID жанра" value={formData.genre_id} onChange={handleChange} />
-            <input name="language" placeholder="Язык" value={formData.language} onChange={handleChange} />
-            <button type="submit">Добавить</button>
+            <input className="book-input" name="title" placeholder="Название" value={formData.title} onChange={handleChange} maxLength={255} required />
+            <input className="book-input" name="description" placeholder="Описание" value={formData.description} onChange={handleChange} maxLength={255} />
+            <input className="book-input" name="author_id" placeholder="ID автора" value={formData.author_id} onChange={handleChange} type={"number"} required />
+            <input className="book-input" name="genre_id" placeholder="ID жанра" value={formData.genre_id} onChange={handleChange} type={"number"} />
+            <input className="book-input" name="language" placeholder="Язык" value={formData.language} onChange={handleChange} maxLength={2} />
+            <button className="submit-button" type="submit">Добавить</button>
         </form>
     );
 };
