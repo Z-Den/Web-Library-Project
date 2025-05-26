@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const BookList = ({ books, searchQuery, onDeleteBook, onEditBook }) => {
+const BookList = ({ books, searchQuery, onDeleteBook, onEditBook, userName, selectedGenre}) => {
     const [editingBook, setEditingBook] = useState(null);
     const [formData, setFormData] = useState({
         title: '',
@@ -10,9 +10,11 @@ const BookList = ({ books, searchQuery, onDeleteBook, onEditBook }) => {
         language: ''
     });
 
-    const filteredBooks = books.filter(book =>
-        book.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    const filteredBooks = books
+        .filter(book => book.title.toLowerCase().includes(searchQuery.toLowerCase())
+             || book.author_name.toLowerCase().includes(searchQuery.toLowerCase()))
+        .filter(book => !selectedGenre || book.genre_name === selectedGenre);
+
 
     const handleEditClick = (book) => {
         setEditingBook(book.book_id);
@@ -80,11 +82,17 @@ const BookList = ({ books, searchQuery, onDeleteBook, onEditBook }) => {
                         <>
                             <h2>{book.title}</h2>
                             <p>Описание: {book.description}</p>
-                            <p>Автор: {book.author_id}</p>
-                            <p>Жанр: {book.genre_id}</p>
-                            <p>Язык: {book.language}</p>
-                            <button className="button edit-button" onClick={() => handleEditClick(book)}>Изменить</button>
-                            <button className="button delete-button" onClick={() => onDeleteBook(book.book_id)}>Удалить</button>
+                            <p>Автор: {book.author_name}</p>
+                            <p>Жанр: {book.genre_name}</p>
+                            <p>Язык оригинала: {book.language}</p>
+                            {userName === "admin" && (
+                                <>
+                                    <p>ID автора: {book.author_id}</p>
+                                    <p>ID жанра: {book.genre_id}</p>
+                                    <button className="button edit-button" onClick={() => handleEditClick(book)}>Изменить</button>
+                                    <button className="button delete-button" onClick={() => onDeleteBook(book.book_id)}>Удалить</button>
+                                </>
+                            )}
                         </>
                     )}
                 </div>

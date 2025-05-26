@@ -9,7 +9,7 @@ const SearchBar = ({ setSearchQuery }) => {
         <input
             className="search-bar"
             type="text"
-            placeholder="Поиск по названию..."
+            placeholder="Поиск по названию или автору..."
             onChange={handleChange}
         />
     );

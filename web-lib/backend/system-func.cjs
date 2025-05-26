@@ -1,7 +1,5 @@
 const os = require('os');
 const fs = require('fs');
-const path = require('path');
-
 // Получение информации о системе
 function getSystemInfo(req, res) {
     try {

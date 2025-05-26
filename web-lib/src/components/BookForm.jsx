@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const BookForm = ({ onAddBook }) => {
+const BookForm = ({ onAddBook, userName }) => {
     const [formData, setFormData] = useState({
         author_id: '',
         genre_id: '',
@@ -19,6 +19,14 @@ const BookForm = ({ onAddBook }) => {
         onAddBook(formData);
         setFormData({author_id: '', genre_id: '', title: '', description: '', language: '' });
     };
+
+    if (!userName) {
+        return (
+            <div>
+                <h3>Для добавления книг необходимо войти в систему.</h3>
+            </div>
+        );
+    }
 
     return (
         <form className="book-form" onSubmit={handleSubmit}>

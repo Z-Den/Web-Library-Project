@@ -5,36 +5,6 @@
     text-align: center;
 }
 
-.logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-}
-
-.logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.react:hover {
-    filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    a:nth-of-type(2) .logo {
-        animation: logo-spin infinite 20s linear;
-    }
-}
-
 .card {
     padding: 2em;
 }
@@ -46,6 +16,7 @@
     padding: 5px;
     outline: none;
     border-bottom: 1px solid white;
+    font-size: 1.3rem;
 }
 
 .book-input{
@@ -70,6 +41,7 @@
     margin: 20px;
     box-shadow: 5px 2px 6px #ffffff;
     align-items: start;
+    min-width: 300px;
 }
 
 /*.book-item:hover {
@@ -164,7 +136,7 @@
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    font-size: 0.9rem;
+    font-size: 1.3rem;
     font-family: Arial, sans-serif;
 }
 
@@ -174,6 +146,88 @@
     font-weight: bold;
 }
 
+.modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
 
+.modal-content {
+    background-color: #888;
+    width: 400px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-family: sans-serif;
+}
 
+.modal-content h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #000;
+    font-size: 2.5rem;
+}
 
+.modal-content input {
+    font-size: 1.3rem;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 85%;
+}
+
+.modal-content .error {
+    color: darkred;
+    font-weight: bolder;
+    font-size: 1.2rem;
+    padding: 10px 0;
+}
+
+.modal-content .button-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.modal-content button {
+    flex: 1;
+    padding: 10px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #000;
+    color: white;
+    transition: background-color 0.2s;
+}
+
+.modal-content button:hover {
+    background-color: #333;
+}
+
+.modal-content button:last-child {
+    background-color: #ccc;
+    color: #333;
+}
+
+.modal-content button:last-child:hover {
+    background-color: #bbb;
+}
+
+.filter-controls {
+    margin: 10px 0;
+    font-size: 1.3rem;
+}
+
+#genreSelect {
+    margin-left: 10px;
+    padding: 5px;
+}

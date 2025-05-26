@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react'
 import BookList from './components/BookList'
 import BookForm from './components/BookForm'
 import SearchBar from './components/SearchBar'
+import LoginModal from "./components/LoginModal";
 import './App.css'
 
 const API_URL = 'http://localhost:3000/api/books/'
@@ -11,6 +12,11 @@ const App = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [loading, setLoading] = useState(false); // Индикатор загрузки
     const [error, setError] = useState(null); // Ошибка выполнения
+    const [userName, setUserName] = useState('');
+    const [showLogin, setShowLogin] = useState(false);
+    const [genres, setGenres] = useState([]);
+    const [selectedGenre, setSelectedGenre] = useState('');
+
 
     const fetchBooks = async () => {
         setLoading(true);
@@ -31,12 +37,19 @@ const App = () => {
         }
     };
 
+    const fetchGenres = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/api/genres');
+            const data = await response.json();
+            setGenres(data);
+        } catch (error) {
+            console.error('Ошибка при загрузке жанров:', error);
+        }
+    };
+
     useEffect(() => {
-        fetchBooks();
-        fetchSystemInfo();
-        fetchFileInfo();
-        fetchStats();
-    }, []);
+        console.log('Книги с сервера:', books);
+    }, [books]);
 
 
     const handleAddBook = async (book) => {
@@ -122,24 +135,67 @@ const App = () => {
         }
     };
 
-
+    useEffect(() => {
+        fetchBooks();
+        fetchGenres();
+        fetchSystemInfo();
+        fetchFileInfo();
+        fetchStats();
+    }, []);
 
     return (
         <div className="App">
             <h1>Библиотека</h1>
+
+            <div className="auth-header" style={{ position: 'absolute', top: 10, right: 10, fontSize: '1.3rem' }}>
+                {userName ? (
+                    <span>Привет, {userName}!</span>
+                ) : (
+                    <button onClick={() => setShowLogin(true)}>Войти</button>
+                )}
+            </div>
+
+            {showLogin && (
+                <LoginModal
+                    onLogin={(name) => {
+                        setUserName(name);       // Сохраняем имя
+                        setShowLogin(false);     // Закрываем модалку
+                    }}
+                    onClose={() => setShowLogin(false)}
+                />
+            )}
+
 
             {/* Сообщение о статусе выполнения запросов */}
             {loading && <p className="status-loading">Загрузка...</p>}
             {error && <p className="status-error">{error}</p>}
 
             <SearchBar setSearchQuery={setSearchQuery} />
-            <BookForm onAddBook={handleAddBook} />
+            <div className="filter-controls">
+                <label htmlFor="genreSelect">Фильтр по жанру:</label>
+                <select
+                    id="genreSelect"
+                    value={selectedGenre}
+                    onChange={(e) => setSelectedGenre(e.target.value)}
+                >
+                    <option value="">Все жанры</option>
+                    {genres.map((genre) => (
+                        <option key={genre.genre_id} value={genre.name}>
+                            {genre.name}
+                        </option>
+                    ))}
+                </select>
+            </div>
+            <BookForm onAddBook={handleAddBook} userName={userName} />
             <BookList
                 books={books}
+                userName={userName}
                 searchQuery={searchQuery}
                 onDeleteBook={handleDeleteBook}
                 onEditBook={handleEditBook}
+                selectedGenre={selectedGenre}
             />
+            {userName === 'admin' && (
             <div className="system-info">
                 <h2>Информация о системе</h2>
                 {systemInfo ? (
@@ -155,6 +211,8 @@ const App = () => {
                     <p>Загрузка информации о системе...</p>
                 )}
             </div>
+            )}
+            {userName === 'admin' && (
             <div className="file-info">
                 <h2>Содержимое файла</h2>
                 {fileContent ? (
@@ -163,6 +221,7 @@ const App = () => {
                     <p>Загрузка содержимого файла...</p>
                 )}
             </div>
+            )}
             <div className="stats">
                 <p>Книг: {stats.books}</p>
                 <p>Авторов: {stats.authors}</p>

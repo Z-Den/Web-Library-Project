@@ -11,7 +11,20 @@ const pool = new Pool({
 // Получить список книг
 async function getBooks(req, res) {
     try {
-        const result = await pool.query('SELECT * FROM books ORDER BY title');
+        const bookQuery = "SELECT \n" +
+            "    books.book_id,\n" +
+            "    books.title,\n" +
+            "    books.description,\n" +
+            "    books.language,\n" +
+            "    authors.author_id,\n" +
+            "    authors.name AS author_name,\n" +
+            "    genres.genre_id,\n" +
+            "    genres.name AS genre_name\n" +
+            "FROM books\n" +
+            "INNER JOIN authors USING(author_id)\n" +
+            "INNER JOIN genres USING(genre_id)\n" +
+            "ORDER BY books.title;\n";
+        const result = await pool.query(bookQuery);
         res.json(result.rows);
     } catch (error) {
         console.error('Ошибка при получении книг:', error);
@@ -90,4 +103,14 @@ async function getBookStats(req, res) {
     }
 }
 
-module.exports = { getBooks, addBook, deleteBook, updateBook, getBookStats };
+async function getGenres(req, res){
+    try {
+        const result = await pool.query('SELECT genre_id, name FROM genres ORDER BY name');
+        res.json(result.rows);
+    } catch (error) {
+        console.error('Ошибка при получении жанров:', error);
+        res.status(500).json({ error: 'Ошибка сервера' });
+    }
+}
+
+module.exports = { getBooks: getBooks, addBook, deleteBook, updateBook, getBookStats, getGenres };
