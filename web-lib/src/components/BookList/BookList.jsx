@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import './BookList.css';
 
-const BookList = ({ books, searchQuery, onDeleteBook, onEditBook, userName, selectedGenre}) => {
+const BookList = ({ books, searchQuery, onDeleteBook, onEditBook, userRole, selectedGenre}) => {
     const [editingBook, setEditingBook] = useState(null);
     const [formData, setFormData] = useState({
         title: '',
@@ -46,7 +47,7 @@ const BookList = ({ books, searchQuery, onDeleteBook, onEditBook, userName, sele
             {filteredBooks.map(book => (
                 <div className="book-item" key={book.book_id}>
                     {editingBook === book.book_id ? (
-                        <div className="edit-form">
+                        <>
                             <input
                                 name="title"
                                 value={formData.title}
@@ -75,9 +76,9 @@ const BookList = ({ books, searchQuery, onDeleteBook, onEditBook, userName, sele
                                 placeholder="Язык"
                                 maxLength={2}
                             />
-                            <button className="button" onClick={handleSave}>Сохранить</button>
-                            <button className="button" onClick={handleCancel}>Отмена</button>
-                        </div>
+                            <button className="button save-button" onClick={handleSave}>Сохранить</button>
+                            <button className="button cancel-button" onClick={handleCancel}>Отмена</button>
+                        </>
                     ) : (
                         <>
                             <h2>{book.title}</h2>
@@ -85,7 +86,7 @@ const BookList = ({ books, searchQuery, onDeleteBook, onEditBook, userName, sele
                             <p>Автор: {book.author_name}</p>
                             <p>Жанр: {book.genre_name}</p>
                             <p>Язык оригинала: {book.language}</p>
-                            {userName === "admin" && (
+                            {userRole === "admin" && (
                                 <>
                                     <p>ID автора: {book.author_id}</p>
                                     <p>ID жанра: {book.genre_id}</p>

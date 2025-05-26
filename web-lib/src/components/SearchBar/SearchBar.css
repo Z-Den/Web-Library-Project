@@ -1,0 +1,39 @@
+.search-bar {
+    background-color: #242424;
+    color: #fff;
+    border: #242424 1px solid;
+    padding: 5px;
+    outline: none;
+    border-bottom: 1px solid white;
+    font-size: 1.3rem;
+    width: 350px;
+}
+
+.book-input{
+    background-color: #242424;
+    color: #fff;
+    border: #242424 1px solid;
+    padding: 5px;
+    outline: none;
+    border-bottom: 1px solid white;
+    margin-right: 10px;
+}
+
+.search-bar:focus{
+    color: wheat;
+}
+
+.filter-controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    font-size: 1.3rem;
+    gap: 10px;
+}
+
+#genreSelect {
+    padding: 10px;
+    font-size: 1.2rem;
+}

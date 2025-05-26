@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import './BookForm.css';
 
-const BookForm = ({ onAddBook, userName }) => {
+const BookForm = ({ onAddBook, userRole }) => {
     const [formData, setFormData] = useState({
         author_id: '',
         genre_id: '',
@@ -20,10 +21,10 @@ const BookForm = ({ onAddBook, userName }) => {
         setFormData({author_id: '', genre_id: '', title: '', description: '', language: '' });
     };
 
-    if (!userName) {
+    if (!userRole || userRole === 'admin') {
         return (
             <div>
-                <h3>Для добавления книг необходимо войти в систему.</h3>
+                <h3>Для добавления книг необходимо войти в систему в роли админа.</h3>
             </div>
         );
     }
