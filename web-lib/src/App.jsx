@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react'
-import BookList from './components/BookList'
-import BookForm from './components/BookForm'
-import SearchBar from './components/SearchBar'
-import LoginModal from "./components/LoginModal";
+import BookList from './components/BookList/BookList.jsx'
+import BookForm from './components/BookForm/BookForm.jsx'
+import SearchBar from './components/SearchBar/SearchBar.jsx'
+import LoginModal from "./components/LoginModal/LoginModal.jsx";
 import './App.css'
 
 const API_URL = 'http://localhost:3000/api/books/'

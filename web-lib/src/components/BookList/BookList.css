@@ -1,0 +1,113 @@
+/* Общие стили для списка книг (тёмная тема) */
+.book-list {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Карточка книги (базовые стили для тёмной темы) */
+.book-item {
+    width: 100%;
+    max-width: 400px;
+    padding: 16px;
+    margin: 10px;
+    border-radius: 8px;
+    background-color: #1e1e1e;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    color: #e0e0e0;
+    border: 1px solid #333;
+}
+
+/* Текст в карточке */
+.book-item h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+.book-item p {
+    margin: 0;
+    font-size: 14px;
+    color: #b0b0b0;
+}
+
+/* Поля ввода в режиме редактирования */
+.book-item input {
+    width: 100%;
+    padding: 8px 12px;
+    background-color: #2d2d2d;
+    border: 1px solid #444;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #e0e0e0;
+    transition: border-color 0.2s;
+}
+
+.book-item input:focus {
+    outline: none;
+    border-color: #4a90e2;
+    background-color: #333;
+}
+
+/* Общие стили кнопок */
+.book-item .button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+    margin: 0 10px;
+}
+
+/* Конкретные кнопки */
+.edit-button {
+    background-color: #1a73e8;
+    color: white;
+}
+
+.delete-button {
+    background-color: #d32f2f;
+    color: white;
+    margin-top: 8px;
+}
+
+/* Кнопки в режиме редактирования */
+.save-button { /* Сохранить */
+    background-color: #1a73e8;
+    color: white;
+}
+
+.cancel-button { /* Отмена */
+    background-color: #333;
+    color: #e0e0e0;
+    margin-top: 8px;
+}
+
+/* Состояния кнопок */
+.book-item .button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.book-item .button:active {
+    transform: translateY(0);
+}
+
+/* Дополнительные эффекты */
+.book-item {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.book-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Подсветка активного поля */
+.book-item input:focus {
+    box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.3);
+}

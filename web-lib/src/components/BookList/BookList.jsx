@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './BookList.css';
 
 const BookList = ({ books, searchQuery, onDeleteBook, onEditBook, userRole, selectedGenre}) => {
     const [editingBook, setEditingBook] = useState(null);
@@ -46,7 +47,7 @@ const BookList = ({ books, searchQuery, onDeleteBook, onEditBook, userRole, sele
             {filteredBooks.map(book => (
                 <div className="book-item" key={book.book_id}>
                     {editingBook === book.book_id ? (
-                        <div className="edit-form">
+                        <>
                             <input
                                 name="title"
                                 value={formData.title}
@@ -75,9 +76,9 @@ const BookList = ({ books, searchQuery, onDeleteBook, onEditBook, userRole, sele
                                 placeholder="Язык"
                                 maxLength={2}
                             />
-                            <button className="button" onClick={handleSave}>Сохранить</button>
-                            <button className="button" onClick={handleCancel}>Отмена</button>
-                        </div>
+                            <button className="button save-button" onClick={handleSave}>Сохранить</button>
+                            <button className="button cancel-button" onClick={handleCancel}>Отмена</button>
+                        </>
                     ) : (
                         <>
                             <h2>{book.title}</h2>

@@ -1,4 +1,5 @@
 import React from 'react';
+import './SearchBar.css';
 
 const SearchBar = ({ setSearchQuery, selectedGenre, setSelectedGenre, genres }) => {
     const handleSearchChange = (e) => {
