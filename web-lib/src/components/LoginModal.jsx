@@ -17,7 +17,7 @@ const LoginModal = ({ onLogin, onClose }) => {
 
             const data = await res.json();
             if (data.success) {
-                onLogin(data.name);
+                onLogin(data.name, data.role);
                 onClose();
             } else {
                 setError(data.message);

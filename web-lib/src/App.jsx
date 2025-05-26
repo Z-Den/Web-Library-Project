@@ -13,10 +13,8 @@ const App = () => {
     const [loading, setLoading] = useState(false); // Индикатор загрузки
     const [error, setError] = useState(null); // Ошибка выполнения
     const [userName, setUserName] = useState('');
+    const [userRole, setUserRole] = useState('');
     const [showLogin, setShowLogin] = useState(false);
-    const [genres, setGenres] = useState([]);
-    const [selectedGenre, setSelectedGenre] = useState('');
-
 
     const fetchBooks = async () => {
         setLoading(true);
@@ -37,6 +35,9 @@ const App = () => {
         }
     };
 
+    const [genres, setGenres] = useState([]);
+    const [selectedGenre, setSelectedGenre] = useState('');
+
     const fetchGenres = async () => {
         try {
             const response = await fetch('http://localhost:3000/api/genres');
@@ -46,11 +47,6 @@ const App = () => {
             console.error('Ошибка при загрузке жанров:', error);
         }
     };
-
-    useEffect(() => {
-        console.log('Книги с сервера:', books);
-    }, [books]);
-
 
     const handleAddBook = async (book) => {
         try {
@@ -147,7 +143,7 @@ const App = () => {
         <div className="App">
             <h1>Библиотека</h1>
 
-            <div className="auth-header" style={{ position: 'absolute', top: 10, right: 10, fontSize: '1.3rem' }}>
+            <div className="auth-header">
                 {userName ? (
                     <span>Привет, {userName}!</span>
                 ) : (
@@ -157,9 +153,10 @@ const App = () => {
 
             {showLogin && (
                 <LoginModal
-                    onLogin={(name) => {
-                        setUserName(name);       // Сохраняем имя
-                        setShowLogin(false);     // Закрываем модалку
+                    onLogin={(name, role) => {
+                        setUserName(name);
+                        setUserRole(role);
+                        setShowLogin(false);
                     }}
                     onClose={() => setShowLogin(false)}
                 />
@@ -170,32 +167,23 @@ const App = () => {
             {loading && <p className="status-loading">Загрузка...</p>}
             {error && <p className="status-error">{error}</p>}
 
-            <SearchBar setSearchQuery={setSearchQuery} />
-            <div className="filter-controls">
-                <label htmlFor="genreSelect">Фильтр по жанру:</label>
-                <select
-                    id="genreSelect"
-                    value={selectedGenre}
-                    onChange={(e) => setSelectedGenre(e.target.value)}
-                >
-                    <option value="">Все жанры</option>
-                    {genres.map((genre) => (
-                        <option key={genre.genre_id} value={genre.name}>
-                            {genre.name}
-                        </option>
-                    ))}
-                </select>
-            </div>
-            <BookForm onAddBook={handleAddBook} userName={userName} />
+            <SearchBar
+                setSearchQuery={setSearchQuery}
+                setSelectedGenre={setSelectedGenre}
+                selectedGenre={selectedGenre}
+                genres={genres}
+            />
+
+            <BookForm onAddBook={handleAddBook} userRole={userRole} />
             <BookList
                 books={books}
-                userName={userName}
+                userRole={userRole}
                 searchQuery={searchQuery}
                 onDeleteBook={handleDeleteBook}
                 onEditBook={handleEditBook}
                 selectedGenre={selectedGenre}
             />
-            {userName === 'admin' && (
+            {userRole === 'admin' && (
             <div className="system-info">
                 <h2>Информация о системе</h2>
                 {systemInfo ? (
@@ -212,7 +200,7 @@ const App = () => {
                 )}
             </div>
             )}
-            {userName === 'admin' && (
+            {userRole === 'admin' && (
             <div className="file-info">
                 <h2>Содержимое файла</h2>
                 {fileContent ? (
@@ -230,7 +218,7 @@ const App = () => {
         </div>
 
 
-);
+    );
 };
 
 export default App

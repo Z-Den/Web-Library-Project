@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const BookList = ({ books, searchQuery, onDeleteBook, onEditBook, userName, selectedGenre}) => {
+const BookList = ({ books, searchQuery, onDeleteBook, onEditBook, userRole, selectedGenre}) => {
     const [editingBook, setEditingBook] = useState(null);
     const [formData, setFormData] = useState({
         title: '',
@@ -85,7 +85,7 @@ const BookList = ({ books, searchQuery, onDeleteBook, onEditBook, userName, sele
                             <p>Автор: {book.author_name}</p>
                             <p>Жанр: {book.genre_name}</p>
                             <p>Язык оригинала: {book.language}</p>
-                            {userName === "admin" && (
+                            {userRole === "admin" && (
                                 <>
                                     <p>ID автора: {book.author_id}</p>
                                     <p>ID жанра: {book.genre_id}</p>
