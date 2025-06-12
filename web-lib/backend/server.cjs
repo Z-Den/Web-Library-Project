@@ -8,7 +8,8 @@ const {
 } = require('./book-func.cjs');
 
 const {
-    userLogin
+    userLogin,
+    userRegister
 } = require ('./login.cjs');
 
 const app = express();
@@ -33,11 +34,10 @@ app.get('/api/stats', getBookStats);
 
 // Авторизация пользователя
 app.post('/api/login', userLogin);
+app.post('/api/register', userRegister);
 
-//Запрос жанров для фильтрации
+// Запрос жанров для фильтрации
 app.get('/api/genres', getGenres);
-
-
 
 app.listen(port, () => {
     console.log(`Сервер запущен на http://localhost:${port}`);

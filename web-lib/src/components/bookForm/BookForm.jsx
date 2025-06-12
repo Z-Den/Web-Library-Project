@@ -21,7 +21,7 @@ const BookForm = ({ onAddBook, userRole }) => {
         setFormData({author_id: '', genre_id: '', title: '', description: '', language: '' });
     };
 
-    if (!userRole || userRole === 'admin') {
+    if (!userRole || userRole !== 'admin') {
         return (
             <div>
                 <h3>Для добавления книг необходимо войти в систему в роли админа.</h3>

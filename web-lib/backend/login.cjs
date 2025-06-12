@@ -28,4 +28,37 @@ async function userLogin (req, res) {
     }
 }
 
-module.exports = { userLogin };
+// регистрация пользователей
+async function userRegister (req, res) {
+    const {username, password} = req.body;
+
+    try{
+        const checkUser = await pool.query(
+            'SELECT * FROM users WHERE username = $1',
+            [username]
+        );
+
+        if (checkUser.rows.length > 0) {
+            res.status(400).json({ success: false, message: 'Такой пользователь уже существует!' });
+        }
+
+        const result = await pool.query(
+            'INSERT INTO users (username, password, role) VALUES ($1, $2, $3) RETURNING username, role',
+            [username, password, 'user']
+        );
+
+        // Отправляем успешный ответ
+        res.json({
+            success: true,
+            name: result.rows[0].username,
+            role: result.rows[0].role,
+            message: 'Вы успешно зарегистрировались!'
+        });
+
+    } catch (error) {
+        console.error('Ошибка авторизации:', error);
+        res.status(500).json({ success: false, message: 'Ошибка сервера' });
+    }
+}
+
+module.exports = { userLogin, userRegister };
