@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 
-const Header = ({ userName }) => {
+const Header = ({ userName, userRole }) => {
     return (
         <header className="header">
             <div className="header-container">
@@ -31,10 +31,15 @@ const Header = ({ userName }) => {
                         <li className="nav-item">
                             <Link to="/feedback">Обратная связь</Link>
                         </li>
+                        {userRole === 'admin' && (
+                            <li className="nav-item">
+                                <Link to="/admin">Админка</Link>
+                            </li>
+                        )}
                     </ul>
                 </nav>
 
-                <div className="auth">
+                <div className="nav-auth">
                     {userName ? (
                         <span>Привет, {userName}!</span>
                     ) : (

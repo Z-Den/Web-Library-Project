@@ -103,6 +103,7 @@ async function getBookStats(req, res) {
     }
 }
 
+// Получить все жанры
 async function getGenres(req, res){
     try {
         const result = await pool.query('SELECT genre_id, name FROM genres ORDER BY name');

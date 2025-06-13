@@ -44,6 +44,10 @@
     color: #a0a0a0;
 }
 
+.team {
+    display: none;
+}
+
 .team-grid {
     display: flex;
     gap: 2rem;
@@ -68,7 +72,7 @@
     color: #a0a0a0;
 }
 
-.contact button {
+.contact a {
     padding: 0.8rem 2rem;
     background: #4fc3f7;
     color: #121212;
@@ -79,6 +83,6 @@
     font-weight: bold;
 }
 
-.contact button:hover {
+.contact a:hover {
     background: #3da8d8;
 }
