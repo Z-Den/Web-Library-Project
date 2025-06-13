@@ -6,13 +6,11 @@ import SearchBar from '../../components/searchBar/SearchBar.jsx';
 
 const API_URL = 'http://localhost:3000/api/books/';
 
-const Library = () => {
+const Library = ({userRole}) => {
     const [books, setBooks] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [loading, setLoading] = useState(false); // Индикатор загрузки
     const [error, setError] = useState(null); // Ошибка выполнения
-
-    const [userRole, setUserRole] = useState('');
 
     const fetchBooks = async () => {
         setLoading(true);
@@ -139,7 +137,7 @@ const Library = () => {
 
     return (
         <div className="Library">
-            <h1>Библиотека.</h1>
+            <h1>Библиотека</h1>
 
             {/* Сообщение о статусе выполнения запросов */}
             {loading && <p className="status-loading">Загрузка...</p>}

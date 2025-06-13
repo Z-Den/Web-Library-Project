@@ -81,5 +81,6 @@
     top: 10px;
     right: 10px;
     font-size: 1.3rem;
-    visibility: hidden;
+    z-index: 2000;
+
 }
