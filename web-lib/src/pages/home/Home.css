@@ -1,0 +1,113 @@
+.home {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    color: #f0f0f0;
+    background-color: #121212;
+}
+
+.hero {
+    text-align: center;
+    padding: 2rem 0;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 10px;
+    margin-bottom: 3rem;
+    border: 1px solid #333;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #e0e0e0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #b0b0b0;
+}
+
+.hero a {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.hero a:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+}
+
+.features {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.feature-card {
+    flex: 1;
+    padding: 1.5rem;
+    background: #1e1e1e;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #333;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+.feature-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: #e0e0e0;
+}
+
+.feature-card p {
+    color: #a0a0a0;
+}
+
+.popular-books h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    color: #e0e0e0;
+}
+
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.book-card {
+    padding: 1rem;
+    background: #1e1e1e;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s;
+    border: 1px solid #333;
+}
+
+.book-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
+}
+
+.book-card h4 {
+    color: #e0e0e0;
+    margin-bottom: 0.5rem;
+}
+
+.book-card p {
+    color: #a0a0a0;
+}

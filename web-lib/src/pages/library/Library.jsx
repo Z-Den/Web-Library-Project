@@ -1,20 +1,16 @@
-import {useEffect, useState} from 'react'
-import BookList from './components/BookList/BookList'
-import BookForm from './components/BookForm/BookForm'
-import SearchBar from './components/SearchBar/SearchBar'
-import LoginModal from "./components/LoginModal/LoginModal";
-import './App.css'
+import './Library.css';
+import {useEffect, useState} from 'react';
+import BookList from '../../components/bookList/BookList.jsx';
+import BookForm from '../../components/bookForm/BookForm.jsx';
+import SearchBar from '../../components/searchBar/SearchBar.jsx';
 
-const API_URL = 'http://localhost:3000/api/books/'
+const API_URL = 'http://localhost:3000/api/books/';
 
-const App = () => {
+const Library = ({userRole}) => {
     const [books, setBooks] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [loading, setLoading] = useState(false); // Индикатор загрузки
     const [error, setError] = useState(null); // Ошибка выполнения
-    const [userName, setUserName] = useState('');
-    const [userRole, setUserRole] = useState('');
-    const [showLogin, setShowLogin] = useState(false);
 
     const fetchBooks = async () => {
         setLoading(true);
@@ -140,28 +136,8 @@ const App = () => {
     }, []);
 
     return (
-        <div className="App">
+        <div className="Library">
             <h1>Библиотека</h1>
-
-            <div className="auth-header">
-                {userName ? (
-                    <span>Привет, {userName}!</span>
-                ) : (
-                    <button onClick={() => setShowLogin(true)}>Войти</button>
-                )}
-            </div>
-
-            {showLogin && (
-                <LoginModal
-                    onLogin={(name, role) => {
-                        setUserName(name);
-                        setUserRole(role);
-                        setShowLogin(false);
-                    }}
-                    onClose={() => setShowLogin(false)}
-                />
-            )}
-
 
             {/* Сообщение о статусе выполнения запросов */}
             {loading && <p className="status-loading">Загрузка...</p>}
@@ -217,8 +193,7 @@ const App = () => {
             </div>
         </div>
 
-
     );
 };
 
-export default App
+export default Library

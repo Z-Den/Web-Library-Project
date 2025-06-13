@@ -1,0 +1,80 @@
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #1c3e46;
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo svg {
+    fill: currentColor;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover svg {
+    transform: rotate(15deg);
+}
+
+.logo a {
+    color: white;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.logo:hover a {
+    color: #3498db;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 2rem;
+}
+
+.nav-item a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+}
+
+.nav-item a:hover {
+    color: #0066cc;
+}
+
+.nav-auth a {
+    color: #0066cc;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border: 1px solid #0066cc;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.nav-auth a:hover {
+    background-color: #0066cc;
+    color: #ffffff;
+}

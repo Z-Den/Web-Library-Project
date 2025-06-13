@@ -65,19 +65,19 @@
 
 /* Конкретные кнопки */
 .edit-button {
-    background-color: #1a73e8;
+    background-color: #003a88;
     color: white;
 }
 
 .delete-button {
-    background-color: #d32f2f;
+    background-color: #7e0000;
     color: white;
     margin-top: 8px;
 }
 
 /* Кнопки в режиме редактирования */
 .save-button { /* Сохранить */
-    background-color: #1a73e8;
+    background-color: #003a88;
     color: white;
 }
 
