@@ -1,16 +1,27 @@
 const express = require('express');
 const cors = require('cors');
 const {
-    getSystemInfo, getFileInfo
+    getSystemInfo,
+    getFileInfo
 } = require('./system-func.cjs');
 const {
-    getBooks, addBook, deleteBook, updateBook, getBookStats, getGenres
+    getBooks,
+    addBook,
+    deleteBook,
+    updateBook,
+    getBookStats,
+    getGenres,
 } = require('./book-func.cjs');
 
 const {
     userLogin,
-    userRegister
+    userRegister,
 } = require ('./login.cjs');
+
+const {
+    sentApplication,
+    getApplications,
+} = require ('./requests.cjs');
 
 const app = express();
 const port = 3000;
@@ -38,6 +49,13 @@ app.post('/api/register', userRegister);
 
 // Запрос жанров для фильтрации
 app.get('/api/genres', getGenres);
+
+// Маршруты для заявлений пользователей
+app.get('/api/request', getApplications);
+app.post('/api/request', sentApplication);
+
+// Маршруты админа
+
 
 app.listen(port, () => {
     console.log(`Сервер запущен на http://localhost:${port}`);
