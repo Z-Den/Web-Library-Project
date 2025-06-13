@@ -103,15 +103,4 @@ async function getBookStats(req, res) {
     }
 }
 
-// Получить все жанры
-async function getGenres(req, res){
-    try {
-        const result = await pool.query('SELECT genre_id, name FROM genres ORDER BY name');
-        res.json(result.rows);
-    } catch (error) {
-        console.error('Ошибка при получении жанров:', error);
-        res.status(500).json({ error: 'Ошибка сервера' });
-    }
-}
-
-module.exports = { getBooks: getBooks, addBook, deleteBook, updateBook, getBookStats, getGenres };
+module.exports = { getBooks: getBooks, addBook, deleteBook, updateBook, getBookStats };
