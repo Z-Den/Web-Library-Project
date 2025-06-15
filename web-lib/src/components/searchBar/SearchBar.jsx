@@ -18,18 +18,20 @@ const SearchBar = ({ setSearchQuery, selectedGenre, setSelectedGenre, genres }) 
                 placeholder="Поиск по названию или автору..."
                 onChange={handleSearchChange}
             />
-            <select
-                id="genreSelect"
-                value={selectedGenre}
-                onChange={handlePickChange}
-            >
-                <option value="">Все жанры</option>
-                {genres.map((genre) => (
-                    <option key={genre.genre_id} value={genre.name}>
-                        {genre.name}
-                    </option>
-                ))}
-            </select>
+            {genres.length > 0 && (
+                <select
+                    id="genreSelect"
+                    value={selectedGenre}
+                    onChange={handlePickChange}
+                >
+                    <option value="">Все жанры</option>
+                    {genres.map((genre) => (
+                        <option key={genre.genre_id} value={genre.name}>
+                            {genre.name}
+                        </option>
+                    ))}
+                </select>
+            )}
         </div>
     );
 };

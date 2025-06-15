@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import SearchBar from "../searchBar/SearchBar.jsx";
 
 const AuthorSection = () => {
     const [authors, setAuthors] = useState([]);
     const [newAuthor, setNewAuthor] = useState('');
     const [editingAuthor, setEditingAuthor] = useState(null);
     const [error, setError] = useState('');
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const filteredAuthors = authors
+        .filter (a => a.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
     const fetchAuthors = async () => {
         try {
@@ -78,6 +83,11 @@ const AuthorSection = () => {
         <div className="section">
             <h2>Управление авторами</h2>
 
+            <SearchBar
+                setSearchQuery={setSearchQuery}
+                genres={[]}
+            />
+
             {error && <div className="error">{error}</div>}
 
             <div className="form">
@@ -102,7 +112,7 @@ const AuthorSection = () => {
             </div>
 
             <div className="list">
-                {authors.map(author => (
+                {filteredAuthors.map(author => (
                     <div key={author.author_id} className="item">
                         <span>{author.author_id}.</span>
                         <span>{author.name}</span>

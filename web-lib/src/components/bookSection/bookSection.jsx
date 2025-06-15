@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import SearchBar from "../searchBar/SearchBar.jsx";
 
 const BookSection = () => {
     const [books, setBooks] = useState([]);
@@ -16,6 +17,11 @@ const BookSection = () => {
         language: ''
     });
     const [editingId, setEditingId] = useState(null);
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const filteredBooks = books
+        .filter(book => book.title.toLowerCase().includes(searchQuery.toLowerCase())
+            || book.author_name.toLowerCase().includes(searchQuery.toLowerCase()));
 
     const fetchData = async () => {
         setLoading(true);
@@ -127,6 +133,11 @@ const BookSection = () => {
         <div className="book-management">
             <h2>Управление книгами</h2>
 
+            <SearchBar
+                setSearchQuery={setSearchQuery}
+                genres={[]}
+            />
+
             {error && <div className="error-message">{error}</div>}
             {loading && <div className="loading">Загрузка...</div>}
 
@@ -202,7 +213,7 @@ const BookSection = () => {
 
 
             <div className="book-list">
-                {books.map(book => {
+                {filteredBooks.map(book => {
                     const author = authors.find(a => a.author_id === book.author_id)?.name || 'Неизвестен';
                     const genre = genres.find(g => g.genre_id === book.genre_id)?.name || 'Не указан';
 
