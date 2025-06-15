@@ -19,6 +19,10 @@ const App = () => {
             <Header
                 userName={userName}
                 userRole={userRole}
+                OnLogout={() => {
+                    setUserName('');
+                    setUserRole('user');
+                }}
             />
             <Routes>
                 <Route path="/" element={<Home />} />

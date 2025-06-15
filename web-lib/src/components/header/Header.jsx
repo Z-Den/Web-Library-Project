@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 
-const Header = ({ userName, userRole }) => {
+const Header = ({ userName, userRole, OnLogout }) => {
     return (
         <header className="header">
             <div className="header-container">
@@ -41,7 +41,13 @@ const Header = ({ userName, userRole }) => {
 
                 <div className="nav-auth">
                     {userName ? (
-                        <span>Привет, {userName}!</span>
+                        <>
+                            <span>Привет, {userName}!</span>
+                            <span className="exit-button">
+                                <button onClick={OnLogout}>Выйти</button>
+                            </span>
+                        </>
+
                     ) : (
                         <Link to="/auth">Войти</Link>
                     )}
