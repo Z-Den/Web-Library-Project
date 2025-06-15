@@ -27,11 +27,9 @@ const GenreSection = () => {
                 body: JSON.stringify({ name: newGenre })
             });
 
-            if (response.ok) {
-                await fetchGenres();
-            }
-
             if (!response.ok) throw new Error('Ошибка добавления');
+
+            await fetchGenres();
         } catch (err) {
             setError(err.message);
         }
@@ -47,14 +45,11 @@ const GenreSection = () => {
                 body: JSON.stringify({ name: editingGenre.name })
             });
 
-            if (response.ok) {
-                const updatedGenres =
-                    genres.map(g => g.genre_id === editingGenre.genre_id ? editingGenre : g);
-                setGenres(updatedGenres);
-            }
-
             if (!response.ok) throw new Error('Ошибка обновления');
 
+            const updatedGenres =
+                genres.map(g => g.genre_id === editingGenre.genre_id ? editingGenre : g);
+            setGenres(updatedGenres);
             setEditingGenre(null);
         } catch (err) {
             setError(err.message);

@@ -27,12 +27,8 @@ const AuthorSection = () => {
                 body: JSON.stringify({ name: newAuthor })
             });
 
-            if (response.ok) {
-                await fetchAuthors();
-            }
-
             if (!response.ok) throw new Error('Ошибка добавления');
-
+            await fetchAuthors();
             setNewAuthor('');
 
         } catch (err) {
@@ -52,12 +48,9 @@ const AuthorSection = () => {
 
             if (!response.ok) throw new Error('Ошибка обновления');
 
-            if (response.ok) {
-                const updatedAuthors =
-                    authors.map(a => a.author_id === editingAuthor.author_id ? editingAuthor : a);
-                setAuthors(updatedAuthors);
-            }
-
+            const updatedAuthors =
+                authors.map(a => a.author_id === editingAuthor.author_id ? editingAuthor : a);
+            setAuthors(updatedAuthors);
             setEditingAuthor(null);
         } catch (err) {
             setError(err.message);
@@ -70,12 +63,8 @@ const AuthorSection = () => {
                 method: 'DELETE'
             });
 
-            if (response.ok) {
-                await fetchAuthors();
-            }
-
             if (!response.ok) throw new Error('Ошибка удаления');
-
+            setAuthors(authors.filter(a => a.author_id !== id));
         } catch (err) {
             setError(err.message);
         }

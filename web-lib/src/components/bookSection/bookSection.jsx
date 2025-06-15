@@ -17,33 +17,28 @@ const BookSection = () => {
     });
     const [editingId, setEditingId] = useState(null);
 
-    // Загрузка данных
-    useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            try {
-                const [booksRes, authorsRes, genresRes] = await Promise.all([
-                    fetch('http://localhost:3000/api/books'),
-                    fetch('http://localhost:3000/api/authors'),
-                    fetch('http://localhost:3000/api/genres')
-                ]);
+    const fetchData = async () => {
+        setLoading(true);
+        try {
+            const [booksRes, authorsRes, genresRes] = await Promise.all([
+                fetch('http://localhost:3000/api/books'),
+                fetch('http://localhost:3000/api/authors'),
+                fetch('http://localhost:3000/api/genres')
+            ]);
 
-                if (!booksRes.ok || !authorsRes.ok || !genresRes.ok) {
-                    throw new Error('Ошибка загрузки данных');
-                }
-
-                setBooks(await booksRes.json());
-                setAuthors(await authorsRes.json());
-                setGenres(await genresRes.json());
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
+            if (!booksRes.ok || !authorsRes.ok || !genresRes.ok) {
+                throw new Error('Ошибка загрузки данных');
             }
-        };
 
-        fetchData();
-    }, []);
+            setBooks(await booksRes.json());
+            setAuthors(await authorsRes.json());
+            setGenres(await genresRes.json());
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     // Обработчики CRUD операций
     const handleAddBook = async () => {
@@ -61,9 +56,9 @@ const BookSection = () => {
 
             if (!response.ok) throw new Error('Ошибка добавления');
 
-            const newBook = await response.json();
-            setBooks([...books, newBook]);
+            await fetchData();
             resetForm();
+
         } catch (err) {
             setError(err.message);
         }
@@ -123,6 +118,10 @@ const BookSection = () => {
         setEditingId(null);
         setError('');
     };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     return (
         <div className="book-management">
