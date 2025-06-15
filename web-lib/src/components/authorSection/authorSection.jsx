@@ -6,19 +6,16 @@ const AuthorSection = () => {
     const [editingAuthor, setEditingAuthor] = useState(null);
     const [error, setError] = useState('');
 
-    useEffect(() => {
-        const fetchAuthors = async () => {
-            try {
-                const response = await fetch('http://localhost:3000/api/authors');
-                if (!response.ok) throw new Error('Ошибка загрузки');
-                const data = await response.json();
-                setAuthors(data);
-            } catch (err) {
-                setError(err.message);
-            }
-        };
-        fetchAuthors();
-    }, []);
+    const fetchAuthors = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/api/authors');
+            if (!response.ok) throw new Error('Ошибка загрузки');
+            const data = await response.json();
+            setAuthors(data);
+        } catch (err) {
+            setError(err.message);
+        }
+    };
 
     const handleAddAuthor = async () => {
         if (!newAuthor.trim()) return;
@@ -30,11 +27,14 @@ const AuthorSection = () => {
                 body: JSON.stringify({ name: newAuthor })
             });
 
+            if (response.ok) {
+                await fetchAuthors();
+            }
+
             if (!response.ok) throw new Error('Ошибка добавления');
 
-            const addedAuthor = await response.json();
-            setAuthors([...authors, addedAuthor]);
             setNewAuthor('');
+
         } catch (err) {
             setError(err.message);
         }
@@ -44,7 +44,7 @@ const AuthorSection = () => {
         if (!editingAuthor || !editingAuthor.name.trim()) return;
 
         try {
-            const response = await fetch(`http://localhost:3000/api/authors/${editingAuthor.author_id}`, {
+            const response = await fetch(`http://localhost:3000/api/authors/:${editingAuthor.author_id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name: editingAuthor.name })
@@ -52,8 +52,12 @@ const AuthorSection = () => {
 
             if (!response.ok) throw new Error('Ошибка обновления');
 
-            const updatedAuthor = await response.json();
-            setAuthors(authors.map(a => a.author_id === updatedAuthor.author_id ? updatedAuthor : a));
+            if (response.ok) {
+                const updatedAuthors =
+                    authors.map(a => a.author_id === editingAuthor.author_id ? editingAuthor : a);
+                setAuthors(updatedAuthors);
+            }
+
             setEditingAuthor(null);
         } catch (err) {
             setError(err.message);
@@ -62,17 +66,24 @@ const AuthorSection = () => {
 
     const handleDeleteAuthor = async (id) => {
         try {
-            const response = await fetch(`http://localhost:3000/api/authors/${id}`, {
+            const response = await fetch(`http://localhost:3000/api/authors/:${id}`, {
                 method: 'DELETE'
             });
 
+            if (response.ok) {
+                await fetchAuthors();
+            }
+
             if (!response.ok) throw new Error('Ошибка удаления');
 
-            setAuthors(authors.filter(a => a.author_id !== id));
         } catch (err) {
             setError(err.message);
         }
     };
+
+    useEffect(() => {
+        fetchAuthors();
+    }, []);
 
     return (
         <div className="section">

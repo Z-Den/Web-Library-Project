@@ -37,11 +37,12 @@ async function addAuthor(req, res) {
 // Изменить автора
 async function updateAuthor(req, res) {
     const { id } = req.params;
+    let idStr = String(id).substr(1, id.length - 1);
     const { name } = req.body;
     try {
         const result = await pool.query(
             'UPDATE authors SET name = $1 WHERE author_id = $2 RETURNING *',
-            [name, id]
+            [name, Number(idStr)]
         );
         if (result.rowCount === 0) {
             return res.status(404).json({ error: 'Автор не найден' });
@@ -56,10 +57,11 @@ async function updateAuthor(req, res) {
 // Удалить автора
 async function deleteAuthor(req, res) {
     const { id } = req.params;
+    let idStr = String(id).substr(1, id.length - 1);
     try {
         const result = await pool.query(
             'DELETE FROM authors WHERE author_id = $1',
-            [id]
+            [Number(idStr)]
         );
         if (result.rowCount === 0) {
             return res.status(404).json({ error: 'Автор не найден' });

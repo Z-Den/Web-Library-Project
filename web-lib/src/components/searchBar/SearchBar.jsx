@@ -18,7 +18,6 @@ const SearchBar = ({ setSearchQuery, selectedGenre, setSelectedGenre, genres }) 
                 placeholder="Поиск по названию или автору..."
                 onChange={handleSearchChange}
             />
-            <label htmlFor="genreSelect">Фильтр по жанру:</label>
             <select
                 id="genreSelect"
                 value={selectedGenre}

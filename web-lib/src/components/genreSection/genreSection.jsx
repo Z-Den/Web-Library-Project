@@ -6,19 +6,16 @@ const GenreSection = () => {
     const [editingGenre, setEditingGenre] = useState(null);
     const [error, setError] = useState('');
 
-    useEffect(() => {
-        const fetchGenres = async () => {
-            try {
-                const response = await fetch('http://localhost:3000/api/genres');
-                if (!response.ok) throw new Error('Ошибка загрузки');
-                const data = await response.json();
-                setGenres(data);
-            } catch (err) {
-                setError(err.message);
-            }
-        };
-        fetchGenres();
-    }, []);
+    const fetchGenres = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/api/genres');
+            if (!response.ok) throw new Error('Ошибка загрузки');
+            const data = await response.json();
+            setGenres(data);
+        } catch (err) {
+            setError(err.message);
+        }
+    };
 
     const handleAddGenre = async () => {
         if (!newGenre.trim()) return;
@@ -30,11 +27,11 @@ const GenreSection = () => {
                 body: JSON.stringify({ name: newGenre })
             });
 
-            if (!response.ok) throw new Error('Ошибка добавления');
+            if (response.ok) {
+                await fetchGenres();
+            }
 
-            const addedGenre = await response.json();
-            setGenres([...genres, addedGenre]);
-            setNewGenre('');
+            if (!response.ok) throw new Error('Ошибка добавления');
         } catch (err) {
             setError(err.message);
         }
@@ -44,16 +41,20 @@ const GenreSection = () => {
         if (!editingGenre || !editingGenre.name.trim()) return;
 
         try {
-            const response = await fetch(`http://localhost:3000/api/genres/${editingGenre.genre_id}`, {
+            const response = await fetch(`http://localhost:3000/api/genres/:${editingGenre.genre_id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name: editingGenre.name })
             });
 
+            if (response.ok) {
+                const updatedGenres =
+                    genres.map(g => g.genre_id === editingGenre.genre_id ? editingGenre : g);
+                setGenres(updatedGenres);
+            }
+
             if (!response.ok) throw new Error('Ошибка обновления');
 
-            const updatedGenre = await response.json();
-            setGenres(genres.map(g => g.genre_id === updatedGenre.genre_id ? updatedGenre : g));
             setEditingGenre(null);
         } catch (err) {
             setError(err.message);
@@ -62,7 +63,7 @@ const GenreSection = () => {
 
     const handleDeleteGenre = async (id) => {
         try {
-            const response = await fetch(`http://localhost:3000/api/genres/${id}`, {
+            const response = await fetch(`http://localhost:3000/api/genres/:${id}`, {
                 method: 'DELETE'
             });
 
@@ -73,6 +74,11 @@ const GenreSection = () => {
             setError(err.message);
         }
     };
+
+    useEffect(() => {
+
+        fetchGenres();
+    }, []);
 
     return (
         <div className="section">

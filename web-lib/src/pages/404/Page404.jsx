@@ -1,4 +1,5 @@
 import './Page404.css';
+import {Link} from "react-router-dom";
 
 const pageNotFound = () => {
     return(
@@ -15,7 +16,7 @@ const pageNotFound = () => {
                     <div className="flying-book">🖋️</div>
                 </div>
 
-                <button>Вернуться на главную</button>
+                <Link to={'/'}>Вернуться на главную</Link>
             </div>
         </div>
     )

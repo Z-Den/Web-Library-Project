@@ -39,7 +39,9 @@ const App = () => {
                         />
                     }
                 />
-                <Route path="/admin" element={<AdminPanel />} />
+                {userRole === 'admin' &&
+                    <Route path="/admin" element={<AdminPanel />} />
+                }
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </>

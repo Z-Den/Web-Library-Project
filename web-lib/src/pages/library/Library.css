@@ -5,6 +5,10 @@
     text-align: center;
 }
 
+.Library {
+    width: 100vh;
+}
+
 .status-loading {
     color: white;
     font-size: 1.2rem;

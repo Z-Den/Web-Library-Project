@@ -150,7 +150,7 @@ const Library = ({userRole}) => {
                 genres={genres}
             />
 
-            <BookForm onAddBook={handleAddBook} userRole={userRole} />
+            {/*<BookForm onAddBook={handleAddBook} userRole={userRole} />*/}
             <BookList
                 books={books}
                 userRole={userRole}
@@ -160,31 +160,32 @@ const Library = ({userRole}) => {
                 selectedGenre={selectedGenre}
             />
             {userRole === 'admin' && (
-            <div className="system-info">
-                <h2>Информация о системе</h2>
-                {systemInfo ? (
-                    <ul>
-                        <li>Платформа: {systemInfo.platform}</li>
-                        <li>Архитектура: {systemInfo.architecture}</li>
-                        <li>Процессоры: {systemInfo.cpus.join(', ')}</li>
-                        <li>Общая память: {(systemInfo.totalMemory / (1024 ** 3)).toFixed(2)} GB</li>
-                        <li>Свободная память: {(systemInfo.freeMemory / (1024 ** 3)).toFixed(2)} GB</li>
-                        <li>Время работы системы: {(systemInfo.uptime / 3600).toFixed(2)} часов</li>
-                    </ul>
-                ) : (
-                    <p>Загрузка информации о системе...</p>
-                )}
-            </div>
-            )}
-            {userRole === 'admin' && (
-            <div className="file-info">
-                <h2>Содержимое файла</h2>
-                {fileContent ? (
-                    <pre>{fileContent}</pre>
-                ) : (
-                    <p>Загрузка содержимого файла...</p>
-                )}
-            </div>
+            <>
+                <div className="system-info">
+                    <h2>Информация о системе</h2>
+                    {systemInfo ? (
+                        <ul>
+                            <li>Платформа: {systemInfo.platform}</li>
+                            <li>Архитектура: {systemInfo.architecture}</li>
+                            <li>Процессоры: {systemInfo.cpus.join(', ')}</li>
+                            <li>Общая память: {(systemInfo.totalMemory / (1024 ** 3)).toFixed(2)} GB</li>
+                            <li>Свободная память: {(systemInfo.freeMemory / (1024 ** 3)).toFixed(2)} GB</li>
+                            <li>Время работы системы: {(systemInfo.uptime / 3600).toFixed(2)} часов</li>
+                        </ul>
+                    ) : (
+                        <p>Загрузка информации о системе...</p>
+                    )}
+                </div>
+
+                <div className="file-info">
+                    <h2>Содержимое файла</h2>
+                    {fileContent ? (
+                        <pre>{fileContent}</pre>
+                    ) : (
+                        <p>Загрузка содержимого файла...</p>
+                    )}
+                </div>
+            </>
             )}
             <div className="stats">
                 <p>Книг: {stats.books}</p>
