@@ -35,7 +35,7 @@
 
 /* Поля ввода в режиме редактирования */
 .book-item input {
-    width: 100%;
+    width: calc(100% - 27px);
     padding: 8px 12px;
     background-color: #2d2d2d;
     border: 1px solid #444;
@@ -76,7 +76,7 @@
 }
 
 /* Кнопки в режиме редактирования */
-.save-button { /* Сохранить */
+.save-button {
     background-color: #003a88;
     color: white;
 }

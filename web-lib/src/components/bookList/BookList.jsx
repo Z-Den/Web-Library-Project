@@ -86,7 +86,7 @@ const BookList = ({ books, searchQuery, onDeleteBook, onEditBook, userRole, sele
                             <p>Автор: {book.author_name}</p>
                             <p>Жанр: {book.genre_name}</p>
                             <p>Язык оригинала: {book.language}</p>
-                            {userRole === "adminPanel" && (
+                            {userRole === "admin" && (
                                 <>
                                     <p>ID автора: {book.author_id}</p>
                                     <p>ID жанра: {book.genre_id}</p>
