@@ -38,14 +38,16 @@ const Feedback = () => {
             });
 
             if (!response.ok) {
-                throw new Error('Ошибка сервера');
+                const errorData = await response.json(); // Попробуйте прочитать тело ошибки
+                console.error('Error details:', errorData);
+                throw new Error(errorData.message || 'Ошибка сервера');
             }
 
             setIsSubmitted(true);
 
         } catch (error) {
             console.error('Ошибка:', error);
-            setError('Произошла ошибка при отправке заявки. Пожалуйста, попробуйте позже.');
+            setError(error.message || 'Произошла ошибка при отправке заявки. Пожалуйста, попробуйте позже.');
         }
     };
 

@@ -19,6 +19,10 @@ const App = () => {
             <Header
                 userName={userName}
                 userRole={userRole}
+                OnLogout={() => {
+                    setUserName('');
+                    setUserRole('user');
+                }}
             />
             <Routes>
                 <Route path="/" element={<Home />} />
@@ -35,7 +39,9 @@ const App = () => {
                         />
                     }
                 />
-                <Route path="/admin" element={<AdminPanel />} />
+                {userRole === 'admin' &&
+                    <Route path="/admin" element={<AdminPanel />} />
+                }
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </>

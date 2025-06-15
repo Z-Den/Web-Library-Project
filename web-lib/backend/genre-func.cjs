@@ -11,7 +11,7 @@ const pool = new Pool({
 // Получить жанры
 async function getGenres(req, res){
     try {
-        const result = await pool.query('SELECT * FROM genres ORDER BY name');
+        const result = await pool.query('SELECT * FROM genres');
         res.json(result.rows);
     } catch (error) {
         console.error('Ошибка при получении жанров:', error);
@@ -37,11 +37,12 @@ async function addGenre(req, res) {
 // Изменить жанр
 async function updateGenre(req, res) {
     const { id } = req.params;
+    let idStr = String(id).substr(1, id.length - 1);
     const { name } = req.body;
     try {
         const result = await pool.query(
             'UPDATE genres SET name = $1 WHERE genre_id = $2 RETURNING *',
-            [name, id]
+            [name, Number(idStr)]
         );
         if (result.rowCount === 0) {
             return res.status(404).json({ error: 'Жанр не найден' });
@@ -56,10 +57,11 @@ async function updateGenre(req, res) {
 // Удалить жанр
 async function deleteGenre(req, res) {
     const { id } = req.params;
+    let idStr = String(id).substr(1, id.length - 1);
     try {
         const result = await pool.query(
             'DELETE FROM genres WHERE genre_id = $1',
-            [id]
+            [Number(idStr)]
         );
         if (result.rowCount === 0) {
             return res.status(404).json({ error: 'Жанр не найден' });
