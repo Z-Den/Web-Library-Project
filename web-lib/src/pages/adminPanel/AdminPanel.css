@@ -61,6 +61,7 @@
     border: 1px solid #444;
     border-radius: 4px;
     color: #e0e0e0;
+    font-size: 1rem;
 }
 
 .form button {
@@ -130,6 +131,7 @@
     border: 1px solid #444;
     border-radius: 4px;
     color: #fff;
+    font-size: 1rem;
 }
 
 .book-form select {
@@ -181,6 +183,13 @@
 .book-info h3 {
     margin-top: 0;
     color: #4fc3f7;
+    font-size: 1.3em;
+}
+
+.book-info p {
+    font-size: 1em;
+    text-align: left;
+    padding-left: 2em;
 }
 
 .book-info b{
