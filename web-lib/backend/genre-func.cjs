@@ -11,7 +11,7 @@ const pool = new Pool({
 // Получить жанры
 async function getGenres(req, res){
     try {
-        const result = await pool.query('SELECT * FROM genres ORDER BY name');
+        const result = await pool.query('SELECT * FROM genres');
         res.json(result.rows);
     } catch (error) {
         console.error('Ошибка при получении жанров:', error);

@@ -11,7 +11,7 @@ const pool = new Pool({
 // Получить авторов
 async function getAuthors(req, res) {
     try {
-        const result = await pool.query('SELECT * FROM authors ORDER BY name');
+        const result = await pool.query('SELECT * FROM authors');
         res.json(result.rows);
     } catch (error) {
         console.error('Ошибка при получении авторов:', error);
