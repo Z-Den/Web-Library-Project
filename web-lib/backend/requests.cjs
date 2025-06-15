@@ -20,9 +20,12 @@ async function sentApplication(req, res){
             `INSERT INTO applications ("userName", "userMail", "userMessage") VALUES ($1, $2, $3)`,
             [userName, userEmail, userMessage]
         );
+
+        res.status(200).json({success: true})
     }
     catch (e) {
         res.status(500).json({
+            success: false,
             message: 'Что-то пошло не так...',
             error: e
         });

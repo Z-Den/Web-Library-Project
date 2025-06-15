@@ -52,7 +52,7 @@ const Library = ({userRole}) => {
                 body: JSON.stringify(book),
             });
             if (response.ok) {
-                fetchBooks();
+                await fetchBooks();
             }
         } catch (error) {
             console.error('Ошибка при добавлении книги:', error);
