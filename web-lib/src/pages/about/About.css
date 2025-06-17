@@ -1,6 +1,5 @@
 .about {
     max-width: 1000px;
-    max-height: 85vh;
     margin: 0 auto;
     padding: 2rem;
     color: #f0f0f0;
@@ -33,6 +32,10 @@
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     border: 1px solid #333;
+}
+
+.contact {
+    margin-bottom: 0;
 }
 
 .history h2, .team h2, .contact h2 {

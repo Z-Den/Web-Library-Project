@@ -44,6 +44,8 @@ const BookList = ({ books, searchQuery, onDeleteBook, onEditBook, userRole, sele
 
     return (
         <div className="book-list">
+            {filteredBooks.length === 0 && <span>По вашему запросу ничего не нашлось.<br/>
+                                                 Попробуйте поискать что-то ещё!</span>}
             {filteredBooks.map(book => (
                 <div className="book-item" key={book.book_id}>
                     {editingBook === book.book_id ? (
@@ -82,10 +84,11 @@ const BookList = ({ books, searchQuery, onDeleteBook, onEditBook, userRole, sele
                     ) : (
                         <>
                             <h2>{book.title}</h2>
-                            <p>Описание: {book.description}</p>
-                            <p>Автор: {book.author_name}</p>
-                            <p>Жанр: {book.genre_name}</p>
-                            <p>Язык оригинала: {book.language}</p>
+                            <p>Описание: <b>{book.description}</b></p>
+                            <p>Автор: <b>{book.author_name}</b></p>
+                            <p>Жанр: <b>{book.genre_name}</b></p>
+                            <p>Язык оригинала: <b>{book.language}</b></p>
+                            <p>В наличии: <b>{book.in_stock ? 'Да' : 'Нет'}</b></p>
                             {userRole === "admin" && (
                                 <>
                                     <p>ID автора: {book.author_id}</p>
