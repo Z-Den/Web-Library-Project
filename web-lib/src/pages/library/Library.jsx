@@ -1,7 +1,6 @@
 import './Library.css';
 import {useEffect, useState} from 'react';
 import BookList from '../../components/bookList/BookList.jsx';
-import BookForm from '../../components/bookForm/BookForm.jsx';
 import SearchBar from '../../components/searchBar/SearchBar.jsx';
 
 const API_URL = 'http://localhost:3000/api/books/';
@@ -41,53 +40,6 @@ const Library = ({userRole}) => {
             setGenres(data);
         } catch (error) {
             console.error('Ошибка при загрузке жанров:', error);
-        }
-    };
-
-    const handleAddBook = async (book) => {
-        try {
-            const response = await fetch(API_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(book),
-            });
-            if (response.ok) {
-                await fetchBooks();
-            }
-        } catch (error) {
-            console.error('Ошибка при добавлении книги:', error);
-        }
-    };
-
-    const handleDeleteBook = async (id) => {
-        try {
-            const response = await fetch(`${API_URL}:${id}`, {
-                method: 'DELETE',
-            });
-            if (response.ok) {
-                fetchBooks();
-            }
-        } catch (error) {
-            console.error('Ошибка при удалении книги:', error);
-        }
-    };
-
-    const handleEditBook = async (id, updatedBook) => {
-        try {
-            const response = await fetch(`${API_URL}:${id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(updatedBook),
-            });
-
-            if (response.ok) {
-                const updatedBooks = books.map(book =>
-                    book.book_id === id ? { ...book, ...updatedBook } : book
-                );
-                setBooks(updatedBooks);
-            }
-        } catch (error) {
-            console.error('Ошибка при редактировании книги:', error);
         }
     };
 
@@ -150,43 +102,41 @@ const Library = ({userRole}) => {
                 genres={genres}
             />
 
-            {/*<BookForm onAddBook={handleAddBook} userRole={userRole} />*/}
             <BookList
                 books={books}
-                userRole={userRole}
                 searchQuery={searchQuery}
-                onDeleteBook={handleDeleteBook}
-                onEditBook={handleEditBook}
                 selectedGenre={selectedGenre}
             />
-            {userRole === 'admin' && (
-            <>
-                <div className="system-info">
-                    <h2>Информация о системе</h2>
-                    {systemInfo ? (
-                        <ul>
-                            <li>Платформа: {systemInfo.platform}</li>
-                            <li>Архитектура: {systemInfo.architecture}</li>
-                            <li>Процессоры: {systemInfo.cpus.join(', ')}</li>
-                            <li>Общая память: {(systemInfo.totalMemory / (1024 ** 3)).toFixed(2)} GB</li>
-                            <li>Свободная память: {(systemInfo.freeMemory / (1024 ** 3)).toFixed(2)} GB</li>
-                            <li>Время работы системы: {(systemInfo.uptime / 3600).toFixed(2)} часов</li>
-                        </ul>
-                    ) : (
-                        <p>Загрузка информации о системе...</p>
-                    )}
-                </div>
 
-                <div className="file-info">
-                    <h2>Содержимое файла</h2>
-                    {fileContent ? (
-                        <pre>{fileContent}</pre>
-                    ) : (
-                        <p>Загрузка содержимого файла...</p>
-                    )}
-                </div>
-            </>
-            )}
+            {/*{userRole === 'admin' && (*/}
+            {/*<>*/}
+            {/*    <div className="system-info">*/}
+            {/*        <h2>Информация о системе</h2>*/}
+            {/*        {systemInfo ? (*/}
+            {/*            <ul>*/}
+            {/*                <li>Платформа: {systemInfo.platform}</li>*/}
+            {/*                <li>Архитектура: {systemInfo.architecture}</li>*/}
+            {/*                <li>Процессоры: {systemInfo.cpus.join(', ')}</li>*/}
+            {/*                <li>Общая память: {(systemInfo.totalMemory / (1024 ** 3)).toFixed(2)} GB</li>*/}
+            {/*                <li>Свободная память: {(systemInfo.freeMemory / (1024 ** 3)).toFixed(2)} GB</li>*/}
+            {/*                <li>Время работы системы: {(systemInfo.uptime / 3600).toFixed(2)} часов</li>*/}
+            {/*            </ul>*/}
+            {/*        ) : (*/}
+            {/*            <p>Загрузка информации о системе...</p>*/}
+            {/*        )}*/}
+            {/*    </div>*/}
+
+            {/*    <div className="file-info">*/}
+            {/*        <h2>Содержимое файла</h2>*/}
+            {/*        {fileContent ? (*/}
+            {/*            <pre>{fileContent}</pre>*/}
+            {/*        ) : (*/}
+            {/*            <p>Загрузка содержимого файла...</p>*/}
+            {/*        )}*/}
+            {/*    </div>*/}
+            {/*</>*/}
+            {/*)}*/}
+
             <div className="stats">
                 <p>Книг: {stats.books}</p>
                 <p>Авторов: {stats.authors}</p>
