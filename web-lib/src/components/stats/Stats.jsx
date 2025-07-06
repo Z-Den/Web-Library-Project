@@ -1,6 +1,6 @@
 import {useState, useEffect} from  "react";
 
-export const Stats = () => {
+const Stats = () => {
 
     const [stats, setStats] = useState({ books: 0, authors: 0, genres: 0 }); // Состояние для статистики
 
@@ -26,3 +26,5 @@ export const Stats = () => {
         </div>
     )
 }
+
+export default Stats;
