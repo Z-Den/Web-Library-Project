@@ -14,7 +14,8 @@ const BookSection = () => {
         genre_id: '',
         title: '',
         description: '',
-        language: ''
+        language: '',
+        in_stock: false,
     });
     const [editingId, setEditingId] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
@@ -108,7 +109,8 @@ const BookSection = () => {
             language: book.language,
             author_id: book.author_id,
             genre_id: book.genre_id,
-            description: book.description
+            description: book.description,
+            in_stock: book.in_stock,
         });
         setEditingId(book.book_id);
     };
@@ -199,6 +201,17 @@ const BookSection = () => {
                     onChange={(e) => setFormData({...formData, description: e.target.value})}
                 />
 
+                <>
+                    <label htmlFor="stock">В наличии:</label>
+                    <input
+                        type={"checkbox"}
+                        className={"stock"}
+                        checked={formData.in_stock}
+                        onChange={(e) => setFormData({...formData, in_stock: e.target.checked})}
+                    />
+                </>
+
+
                 <div className="form-actions">
                     {editingId ? (
                         <>
@@ -225,6 +238,7 @@ const BookSection = () => {
                                 <p>Автор: <b>{author}</b></p>
                                 <p>Жанр: <b>{genre}</b></p>
                                 <p>Язык: <b>{book.language}</b></p>
+                                <p>Наличие: <b>{book.in_stock ? 'Да' : 'Нет'}</b></p>
                             </div>
                             <div className="book-actions">
                                 <button onClick={() => handleEditClick(book)}>✏️</button>

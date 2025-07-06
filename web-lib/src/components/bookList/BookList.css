@@ -4,7 +4,14 @@
     flex-direction: row;
 }
 
-/* Карточка книги (базовые стили для тёмной темы) */
+.book-list span {
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.3rem;
+    grid-column: span 3;
+}
+
+/* Карточка книги */
 .book-item {
     width: 100%;
     max-width: 400px;

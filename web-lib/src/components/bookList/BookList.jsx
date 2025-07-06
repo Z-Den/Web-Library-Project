@@ -9,9 +9,10 @@ const BookList = ({ books, searchQuery, selectedGenre}) => {
 
     return (
         <div className="book-list">
+            {filteredBooks.length === 0 && <span>По вашему запросу ничего не нашлось.<br/>
+                                                 Попробуйте поискать что-то ещё!</span>}
             {filteredBooks.map(book => (
                 <div className="book-item" key={book.book_id}>
-
                     <h2>{book.title}</h2>
                     <p>Автор: <b>{book.author_name}</b></p>
                     <p>Жанр: <b>{book.genre_name}</b></p>

@@ -16,6 +16,7 @@ async function getBooks(req, res) {
             "    books.title,\n" +
             "    books.description,\n" +
             "    books.language,\n" +
+            "    books.in_stock, \n" +
             "    authors.author_id,\n" +
             "    authors.name AS author_name,\n" +
             "    genres.genre_id,\n" +
@@ -34,11 +35,11 @@ async function getBooks(req, res) {
 
 // Добавить книгу
 async function addBook(req, res) {
-    const { author_id, genre_id, title, description, language } = req.body;
+    const { author_id, genre_id, title, description, language, in_stock } = req.body;
     try {
         await pool.query(
-            'INSERT INTO books (author_id, genre_id, title, description, language) VALUES ($1, $2, $3, $4, $5)',
-            [author_id, genre_id, title, description, language]
+            'INSERT INTO books (author_id, genre_id, title, description, language, in_stock) VALUES ($1, $2, $3, $4, $5, $6)',
+            [author_id, genre_id, title, description, language, in_stock]
         );
         res.status(201).send('Книга добавлена.');
     } catch (error) {
@@ -64,12 +65,12 @@ async function deleteBook(req, res) {
 // Обновить информацию о книге
 async function updateBook(req, res) {
     const { id } = req.params;
-    const { title, author_id, genre_id, language } = req.body;
+    const { title, author_id, genre_id, language, in_stock } = req.body;
 
     try {
         const result = await pool.query(
-            'UPDATE books SET title = $1, author_id = $2, genre_id = $3, language = $4 WHERE book_id = $5 RETURNING *',
-            [title, author_id, genre_id, language, Number(String(id).substr(1, id.length - 1))]
+            'UPDATE books SET title = $1, author_id = $2, genre_id = $3, language = $4, in_stock = $5 WHERE book_id = $6 RETURNING *',
+            [title, author_id, genre_id, language, in_stock, Number(String(id).substr(1, id.length - 1))]
         );
 
         if (result.rowCount === 0) {
