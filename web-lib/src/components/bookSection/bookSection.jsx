@@ -154,16 +154,17 @@ const BookSection = () => {
                     onChange={(e) => setFormData({...formData, language: e.target.value})}
                 >
                     <option value="">Выберите язык</option>
-                    <option value="RU">Русский</option>
-                    <option value="EN">Английский</option>
-                    <option value="DE">Немецкий</option>
-                    <option value="FR">Французский</option>
-                    <option value="IT">Итальянский</option>
-                    <option value="ES">Испанский</option>
-                    <option value="PT">Португальский</option>
-                    <option value="JA">Японский</option>
-                    <option value="KO">Корейский</option>
-                    <option value="ZH">Китайский</option>
+                    <option value="RU">Русский (RU)</option>
+                    <option value="EN">Английский (EN)</option>
+                    <option value="DE">Немецкий (DE)</option>
+                    <option value="FR">Французский (FR)</option>
+                    <option value="IT">Итальянский (IT)</option>
+                    <option value="ES">Испанский (ES)</option>
+                    <option value="PT">Португальский (PI)</option>
+                    <option value="JA">Японский (JA)</option>
+                    <option value="KO">Корейский (KO)</option>
+                    <option value="ZH">Китайский (ZH)</option>
+                    
                 </select>
 
                 <select
