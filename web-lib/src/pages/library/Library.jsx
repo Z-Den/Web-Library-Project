@@ -1,7 +1,8 @@
 import './Library.css';
 import {useEffect, useState} from 'react';
-import BookList from '../../components/bookList/BookList.jsx';
-import SearchBar from '../../components/searchBar/SearchBar.jsx';
+import {BookList} from '../../components/bookList/BookList.jsx';
+import {SearchBar} from '../../components/searchBar/SearchBar.jsx';
+import {Stats} from "../../components/stats/Stats.jsx";
 
 const API_URL = 'http://localhost:3000/api/books/';
 
@@ -137,11 +138,7 @@ const Library = ({userRole}) => {
             {/*</>*/}
             {/*)}*/}
 
-            <div className="stats">
-                <p>Книг: {stats.books}</p>
-                <p>Авторов: {stats.authors}</p>
-                <p>Жанров: {stats.genres}</p>
-            </div>
+            <Stats/>
         </div>
 
     );
