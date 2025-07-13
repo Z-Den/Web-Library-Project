@@ -78,11 +78,11 @@ const AuthorSection = () => {
     useEffect(() => {
         fetchAuthors();
     }, []);
+    //TODO: make search bar also work as an input for adding new authors
 
     return (
         <div className="section">
             <h2>Управление авторами</h2>
-
             <SearchBar
                 setSearchQuery={setSearchQuery}
                 genres={[]}

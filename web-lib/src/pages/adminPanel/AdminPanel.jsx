@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import GenreSection from '../../components/genreSection/genreSection.jsx';
 import AuthorSection from '../../components/authorSection/authorSection.jsx';
 import BookSection from '../../components/bookSection/bookSection.jsx';

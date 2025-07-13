@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SearchBar from "../searchBar/SearchBar.jsx";
+import BookList from "../bookList/BookList.jsx";
 
 const BookSection = () => {
     const [books, setBooks] = useState([]);
@@ -7,6 +8,8 @@ const BookSection = () => {
     const [genres, setGenres] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+
+    //TODO: create component to add book
 
     // Форма для добавления/редактирования
     const [formData, setFormData] = useState({
@@ -19,10 +22,6 @@ const BookSection = () => {
     });
     const [editingId, setEditingId] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
-
-    const filteredBooks = books
-        .filter(book => book.title.toLowerCase().includes(searchQuery.toLowerCase())
-            || book.author_name.toLowerCase().includes(searchQuery.toLowerCase()));
 
     const fetchData = async () => {
         setLoading(true);
@@ -82,7 +81,13 @@ const BookSection = () => {
             if (!response.ok) throw new Error('Ошибка обновления');
 
             const updatedBook = await response.json();
+
+            //TODO: fix this
             setBooks(books.map(b => b.book_id === editingId ? updatedBook : b));
+
+            //TODO: after fix delete this
+            await fetchData();
+
             resetForm();
         } catch (err) {
             setError(err.message);
@@ -121,7 +126,8 @@ const BookSection = () => {
             language: '',
             author_id: '',
             genre_id: '',
-            description: ''
+            description: '',
+            in_stock: false,
         });
         setEditingId(null);
         setError('');
@@ -224,30 +230,14 @@ const BookSection = () => {
                 </div>
             </div>
 
+            <BookList
+                books={books}
+                searchQuery={searchQuery}
+                handleEditClick={handleEditClick}
+                handleDeleteBook={handleDeleteBook}
+                userRole={"admin"}
+            />
 
-
-            <div className="book-list">
-                {filteredBooks.map(book => {
-                    const author = authors.find(a => a.author_id === book.author_id)?.name || 'Неизвестен';
-                    const genre = genres.find(g => g.genre_id === book.genre_id)?.name || 'Не указан';
-
-                    return (
-                        <div key={book.book_id} className="book-item">
-                            <div className="book-info">
-                                <h3>{book.title}</h3>
-                                <p>Автор: <b>{author}</b></p>
-                                <p>Жанр: <b>{genre}</b></p>
-                                <p>Язык: <b>{book.language}</b></p>
-                                <p>Наличие: <b>{book.in_stock ? 'Да' : 'Нет'}</b></p>
-                            </div>
-                            <div className="book-actions">
-                                <button onClick={() => handleEditClick(book)}>✏️</button>
-                                <button onClick={() => handleDeleteBook(book.book_id)}>🗑️</button>
-                            </div>
-                        </div>
-                    );
-                })}
-            </div>
         </div>
     );
 };
