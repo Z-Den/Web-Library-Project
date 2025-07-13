@@ -1,5 +1,6 @@
 .home {
     max-width: 1200px;
+    width: 120vh;
     margin: 0 auto;
     padding: 2rem;
     color: #f0f0f0;
@@ -59,6 +60,10 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s, box-shadow 0.3s;
     border: 1px solid #333;
+}
+
+.feature-card:last-child {
+    display: none;
 }
 
 .feature-card:hover {
