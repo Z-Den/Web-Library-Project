@@ -3,12 +3,12 @@ import './Auth.css';
 import {Link} from "react-router-dom";
 
 const Auth = ({onLogin}) => {
-
-    const [username, setUsername] = useState('');
+    //TODO move localStorage to App.jsx
+    const [username, setUsername] = useState(localStorage.getItem('username') || '');
     const [password, setPassword] = useState('');
 
     const [message, setMessage] = useState('');
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
 
     const [isRegistering, setIsRegistering] = useState(false);
 
@@ -28,6 +28,10 @@ const Auth = ({onLogin}) => {
                 onLogin(data.name, data.role);
                 setMessage(`Добро пожаловать в систему, ${username}!`);
                 setIsLoggedIn(true);
+
+                localStorage.setItem('username', username);
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userRole', data.role);
             } else {
                 setMessage(data.message);
             }
@@ -42,6 +46,9 @@ const Auth = ({onLogin}) => {
         setPassword('');
         setMessage('Вы вышли из системы');
         onLogin('', '');
+        localStorage.removeItem('username');
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userRole');
     }
 
     return (

@@ -10,6 +10,8 @@ import About from "../../pages/about/About.jsx";
 import AdminPanel from "../../pages/adminPanel/AdminPanel.jsx";
 import NotFound from "../../pages/404/Page404.jsx";
 
+//TODO use locale storage for user data
+
 const App = () => {
     const [userName, setUserName] = useState('');
     const [userRole, setUserRole] = useState('user');
